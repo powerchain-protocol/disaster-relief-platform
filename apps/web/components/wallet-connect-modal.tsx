@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useWallet, type WalletKind } from "../providers/wallet-provider";
+import { AssetIcon, WalletBrandIcon } from "./web3-icon";
 
 const wallets: Array<{ kind: WalletKind; note: string }> = [
   { kind: "Phantom", note: "Injected Solana wallet" },
@@ -27,7 +28,7 @@ export function WalletConnectModal() {
   if (wallet.connected && wallet.address) {
     return <div className="wallet-chip">
       <button type="button" className="wallet-chip-main" onClick={() => setOpen(true)}>
-        <span className="wallet-dot"/><span>{wallet.wallet}</span><b>{compact(wallet.address)}</b>
+        <span className="wallet-connected-icon"><WalletBrandIcon name={(wallet.wallet||"").toLowerCase()} size={18}/></span><span>{wallet.wallet}</span><b>{compact(wallet.address)}</b>
       </button>
       <button type="button" className="wallet-disconnect" onClick={() => void wallet.disconnect()} aria-label="Disconnect wallet">×</button>
       {open ? <WalletPanel onClose={() => setOpen(false)} connected /> : null}
@@ -40,7 +41,7 @@ export function WalletConnectModal() {
       {wallets.map(({ kind, note }) => {
         const detected = wallet.installed[kind];
         return <button key={kind} type="button" className="wallet-option" disabled={Boolean(working) || !detected} onClick={() => void connect(kind)}>
-          <span className="wallet-option-icon">{kind.slice(0,1)}</span>
+          <span className="wallet-option-icon"><WalletBrandIcon name={kind.toLowerCase()} size={24}/></span>
           <span><b>{kind}</b><small>{working === kind ? "Connecting…" : detected ? note : "Not detected"}</small></span>
           <i>{detected ? "→" : "—"}</i>
         </button>;
@@ -57,7 +58,7 @@ function WalletPanel({ onClose, error, connected = false, children }: { onClose(
       {connected && wallet.address ? <div className="wallet-portfolio">
         <div><small>ADDRESS</small><b>{wallet.address}</b><button className="wallet-copy" type="button" onClick={() => void navigator.clipboard?.writeText(wallet.address!)}>Copy address</button></div>
         <div className="wallet-summary"><span><small>SOL</small><b>{wallet.portfolioLoading ? "Loading…" : wallet.portfolio?.native.sol?.toLocaleString(undefined,{maximumFractionDigits:6}) ?? "—"}</b></span><span><small>ASSETS</small><b>{wallet.portfolio?.assets.total ?? "—"}</b></span></div>
-        {wallet.portfolio?.assets.items?.length ? <div className="wallet-assets"><small>ASSETS</small>{wallet.portfolio.assets.items.slice(0,5).map(asset => <div key={asset.id}><span>{asset.image ? <img src={asset.image} alt="" /> : <i/>}<b>{asset.symbol || asset.name || "Asset"}</b></span><strong>{asset.uiAmount == null ? "—" : asset.uiAmount.toLocaleString(undefined,{maximumFractionDigits:6})}</strong></div>)}</div> : null}
+        {wallet.portfolio?.assets.items?.length ? <div className="wallet-assets"><small>ASSETS</small>{wallet.portfolio.assets.items.slice(0,5).map(asset => <div key={asset.id}><span>{asset.symbol ? <AssetIcon symbol={asset.symbol} size={22}/> : asset.image ? <img src={asset.image} alt="" /> : <i/>}<b>{asset.symbol || asset.name || "Asset"}</b></span><strong>{asset.uiAmount == null ? "—" : asset.uiAmount.toLocaleString(undefined,{maximumFractionDigits:6})}</strong></div>)}</div> : null}
         {wallet.portfolioError ? <p className="validate-error">{wallet.portfolioError}</p> : null}
         <button type="button" className="button secondary" onClick={() => void wallet.refreshPortfolio()}>Refresh wallet data</button>
       </div> : children}

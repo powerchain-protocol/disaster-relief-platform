@@ -9,6 +9,7 @@ import Fastify, { LogController, type FastifyInstance } from "fastify";
 import { registerPowerChainSolanaApi } from "./api/register.js";
 import { getProviderStatus, getSolanaMarket, getSolanaOverview, getSolanaPrograms, SolanaDataError } from "./services/solana-data.js";
 import { getSloSnapshot, recordHttpSample } from "./runtime-metrics.js";
+import { buildHealthSnapshot } from "./utils/health.js";
 
 const VERSION = "1.0.0" as const;
 const startedAt = Date.now();
@@ -92,12 +93,7 @@ export async function buildApp(): Promise<FastifyInstance> {
     return payload;
   });
 
-  app.get("/api/v1/health", { schema: { tags: ["System"], summary: "Liveness check" } }, async () => ({
-    status: "ok" as const,
-    version: VERSION,
-    uptimeSeconds: Math.floor((Date.now() - startedAt) / 1000),
-    timestamp: new Date().toISOString(),
-  }));
+  app.get("/api/v1/health", { schema: { tags: ["System"], summary: "Process liveness and non-secret runtime snapshot" } }, async () => buildHealthSnapshot(startedAt, VERSION));
 
   app.get("/api/v1/config/public", { schema: { tags: ["System"], summary: "Public, non-secret runtime configuration" } }, async () => ({
     version: VERSION,

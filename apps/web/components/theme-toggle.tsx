@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 
 type Theme = "light" | "dark";
 
@@ -12,29 +13,19 @@ function applyTheme(theme: Theme) {
 
 export function ThemeToggle() {
   const [theme, setTheme] = useState<Theme>("light");
-
   useEffect(() => {
-    const current = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+    const stored = localStorage.getItem("powerchain-theme");
+    const current: Theme = stored === "dark" ? "dark" : "light";
     setTheme(current);
+    applyTheme(current);
   }, []);
-
-  function toggle() {
-    const next = theme === "light" ? "dark" : "light";
+  const toggle = () => {
+    const next: Theme = theme === "light" ? "dark" : "light";
     setTheme(next);
     applyTheme(next);
-  }
-
-  return (
-    <button
-      type="button"
-      className="theme-toggle"
-      onClick={toggle}
-      aria-label={`Switch to ${theme === "light" ? "dark" : "light"} theme`}
-      aria-pressed={theme === "dark"}
-      title={`Switch to ${theme === "light" ? "dark" : "light"} theme`}
-    >
-      <span className="theme-toggle-icon" aria-hidden="true">{theme === "light" ? "☾" : "☀"}</span>
-      <span className="theme-toggle-label">{theme === "light" ? "Dark" : "Light"}</span>
-    </button>
-  );
+  };
+  const label = `Switch to ${theme === "light" ? "dark" : "light"} theme`;
+  return <button type="button" className="theme-toggle icon-only-button" onClick={toggle} aria-label={label} title={label} aria-pressed={theme === "dark"}>
+    {theme === "light" ? <MoonIcon/> : <SunIcon/>}
+  </button>;
 }

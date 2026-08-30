@@ -1,25 +1,3 @@
-import { BrandLockup } from "./brand-lockup";
-import { ProductDropdown } from "./product-dropdown";
-import { ThemeToggle } from "./theme-toggle";
-import { WalletConnectModal } from "./wallet-connect-modal";
-import { MobileNav } from "./mobile-nav";
-
-export function SiteHeader() {
-  return <header className="site-header"><div className="shell header-inner">
-    <a className="brand-link" href="/" aria-label="PowerChain Disaster Relief home"><BrandLockup /></a>
-    <nav className="site-nav" aria-label="Primary navigation">
-      <ProductDropdown />
-      <a href="/about">About</a><a href="/programs">Programs</a><a href="/network">Network</a><a href="/status">Status</a><a href="/docs">Docs</a><a href="/legal">Legal</a>
-    </nav>
-    <div className="header-actions"><ThemeToggle /><WalletConnectModal /><a className="button compact" href="/solana">View dashboard</a><MobileNav /></div>
-  </div></header>;
-}
-
-export function SiteFooter() {
-  return <footer className="site-footer"><div className="shell footer-grid">
-    <div className="footer-brand"><a className="brand-link" href="/"><BrandLockup /></a><p>Verified capital infrastructure for emergency response.</p></div>
-    <div><b>Product</b><a href="/about">Overview</a><a href="/solana">Dashboard</a><a href="/programs">Programs</a></div>
-    <div><b>Resources</b><a href="/docs">Documentation</a><a href="/docs/whitepaper.pdf">Whitepaper</a><a href="/api/swagger">Swagger</a><a href="/api/v1/openapi.json">OpenAPI</a></div>
-    <div><b>Company</b><a href="/about">About</a><a href="/network">Network</a><a href="/status">Status</a><a href="/legal">Legal</a></div>
-  </div><div className="shell footer-bottom"><span>PowerChain Disaster Relief · v1.0.0</span><span>Raised ≠ allocated ≠ released ≠ verified impact.</span></div></footer>;
-}
+import { BrandLockup } from "./brand-lockup";import { ProductDropdown } from "./product-dropdown";import { ThemeToggle } from "./theme-toggle";import { MobileNav } from "./mobile-nav";
+export function SiteHeader(){return <header className="reference-site-header site-header"><div className="shell reference-header-inner header-inner"><a className="brand-link" href="/" aria-label="PowerChain Relief home"><BrandLockup/></a><nav className="site-nav reference-nav" aria-label="Primary navigation"><ProductDropdown/><a href="/programs">Programs</a><a href="/network">Network</a><a href="/about">About</a><a href="/docs">Resources</a></nav><div className="reference-header-actions header-actions"><ThemeToggle/><a className="button header-light-button" href="/solana">View Dashboard</a><a className="button reference-primary" href="/solana">Launch App</a><MobileNav/></div></div></header>}
+export function SiteFooter(){return <footer className="reference-footer site-footer"><div className="shell reference-footer-grid"><div className="reference-footer-brand"><a className="brand-link" href="/"><BrandLockup/></a><p>Transparent. Accountable. Impactful.<br/>Verified capital infrastructure for emergency response.</p></div><div><b>Platform</b><a href="/">Overview</a><a href="/solana">Operations Console</a><a href="/programs">Programs</a><a href="/status">System Status</a></div><div><b>Resources</b><a href="/docs">Documentation</a><a href="/faq">FAQ</a><a href="/api/swagger">API Reference</a><a href="/docs/whitepaper.pdf">Whitepaper</a></div><div><b>Network</b><a href="/network">Solana</a><a href="/programs">Programs</a><a href="/status">Provider Status</a><a href="/api/v1/openapi.json">OpenAPI</a></div><div><b>Company</b><a href="/about">About</a><a href="/about#contact">Partnerships</a><a href="/docs">Resources</a></div><div><b>Legal</b><a href="/legal">Privacy & Terms</a><a href="/legal">Disclaimer</a><a href="/legal">Cookies</a></div></div><div className="shell reference-footer-bottom"><span>© 2026 PowerChain Relief Network</span><span>Raised ≠ allocated ≠ released ≠ verified impact.</span></div></footer>}

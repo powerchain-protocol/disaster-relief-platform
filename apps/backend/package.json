@@ -24,7 +24,7 @@
   "devDependencies": {
     "@types/node": "24.13.2",
     "@types/ws": "8.18.1",
-    "tsx": "4.23.12",
+    "tsx": "4.23.13",
     "typescript": "7.0.2"
   },
   "description": "Canonical Fastify API runtime and Solana service implementation for PowerChain Crisis v1.0.0.",

@@ -1,5 +1,18 @@
-import { BrandLockup } from "../../components/brand-lockup";
-import { ThemeToggle } from "../../components/theme-toggle";
+import { DashboardHeader } from "../../components/dashboard-header";
+import { DashboardFooter } from "../../components/dashboard-footer";
 import { SolanaOperationsConsole } from "../../components/solana-operations-console";
-export const metadata={title:"Solana Operations"};
-export default function SolanaPage(){return <main id="main"><div className="shell"><header className="top"><a className="brand-link" href="/"><BrandLockup compact /></a><nav><ThemeToggle /><a href="/">Product</a><a href="/docs/whitepaper.pdf">Whitepaper</a><a className="button compact" href="/api/swagger">API docs</a></nav></header><section className="page-head"><span className="eyebrow">SOLANA OPERATIONS</span><h1>Source-aware network, program and mint intelligence.</h1><p>All provider credentials remain on the backend. This page uses website-origin API proxies with explicit live/degraded/unavailable states.</p></section><SolanaOperationsConsole/></div></main>}
+import { DashboardMotionShell } from "../../components/dashboard-motion-shell";
+
+export const metadata = { title: "Solana Operations | PowerChain Relief" };
+
+export default function SolanaPage() {
+  return <main id="main" className="dashboard-page">
+    <DashboardHeader/>
+    <section className="shell dashboard-hero">
+      <div><span className="eyebrow">SOLANA OPERATIONS</span><h1>Network truth, programs and provider health.</h1><p>Inspect live Solana state through server-side provider boundaries. Missing data stays unavailable rather than becoming synthetic dashboard values.</p></div>
+      <div className="dashboard-hero-links"><a className="button dashboard-white-button" href="/">Product</a><a className="button dashboard-white-button" href="/docs/whitepaper.pdf">Whitepaper</a></div>
+    </section>
+    <section className="shell dashboard-console-wrap"><DashboardMotionShell><SolanaOperationsConsole/></DashboardMotionShell></section>
+    <DashboardFooter/>
+  </main>;
+}

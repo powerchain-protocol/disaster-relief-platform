@@ -1,119 +1,74 @@
-# System Architecture
+# PowerChain Relief Architecture
 
-## Overview
+**Version:** 1.0.0  
+**Status:** implementation baseline
 
-```text
-Solana RPC / Helius
-Pyth / Jupiter / CoinGecko / CoinMarketCap / Birdeye
-                  |
-                  v
-      apps/backend (canonical runtime)
-        canonical service package
-                  |
-                  v
-        Fastify API - apps/backend
- health | ready | config | providers | OpenAPI | WS
-                  |
-        server-only HTTP boundary
-                  |
-                  v
-         Next.js - apps/web
-         same-origin /api proxy
-                  |
-                  v
-         React operations UI
-                  |
-                  v
-       typed @powerchain/crisis-api-client
-```
+## System objective
 
-## Component responsibilities
+PowerChain Relief is verified capital infrastructure for emergency response. Its architecture deliberately separates five forms of truth:
 
-### `apps/backend`
+1. **Operational truth** — organizations, incidents, capital state, approvals, evidence and ledger records.
+2. **Policy truth** — deterministic rules defining who may do what and under which evidence/approval conditions.
+3. **Settlement truth** — Solana transaction, program and token state.
+4. **Market intelligence** — provider-derived prices and liquidity observations.
+5. **Verified impact** — evidence-backed outcomes after delivery.
 
-The **only backend**. It contains the Fastify runtime and canonical Solana implementation under `src/api` and `src/services`. Compatibility aliases call the same service functions as `/api/v1/*`; there is no root `backend/` package.
-
-Responsibilities:
-
-- HTTP server lifecycle
-- Helmet/security headers
-- CORS
-- global rate limiting
-- 1 MiB body limit
-- internal-origin token validation
-- health/readiness/public config
-- provider status
-- OpenAPI/Swagger
-- WebSocket snapshot stream
-- request IDs and redacted logs
-
-### `apps/web`
-
-Next.js runtime responsible for:
-
-- public website origin
-- server-only API proxy
-- Solana operations console
-- polling and stale-state UX
-- public whitepaper/assets
-
-Provider keys and RPC URLs do not belong in browser bundles.
-
-### `packages/api-contract`
-
-Shared response types only. It contains no runtime provider, RPC, or route logic.
-
-### `packages/api-client`
-
-Typed GET client used by browser/server code. It intentionally exposes canonical and compatibility methods separately so migrations can be explicit.
-
-### Domain packages
-
-- `policy`: quote/action binding and authority separation
-- `fees`: contributor fee quote and successful-funding commission
-- `utility`: PWRC utility categories, Power Units and utility tiers
-- `bridge`: route/replay/supply-conservation checks
-- `token-factory`: issuer-profile production-review checks
-- `rewards`: evidence-bound reward epoch validation
-- `charts`: data-mode and chart-sanity helpers
-
-## Trust boundaries
+## Runtime topology
 
 ```text
-Browser
-  |
-  | no provider secrets
-  v
-Next.js server proxy
-  |
-  | POWERCHAIN_INTERNAL_API_TOKEN (optional/production recommended)
-  v
-Fastify backend
-  |
-  +--> private RPC / Helius
-  +--> Pyth / Jupiter / CoinGecko / CMC / Birdeye
-  |
-  v
-normalized source-aware responses
+Public Website / Dashboard
+          │
+          ▼
+      Next.js Web
+          │ same-origin API
+          ▼
+      Fastify Backend
+          │
+  ┌───────┼─────────┐
+  ▼       ▼         ▼
+Postgres Solana RPC Providers
+  │       │         │
+Capital   │       Pyth
+Policy    │       Jupiter
+Evidence  │       Birdeye
+Ledger    │       CoinGecko
+          │       Helius DAS
+          ▼
+Programs · Balances · Supply · Settlement
 ```
 
-## Data authority hierarchy
+## Execution model
 
-| Data | Authority |
-| --- | --- |
-| Token supply / decimals | Solana RPC `getTokenSupply` |
-| Token program / authorities / extensions | Solana mint account inspection |
-| Program deployment | Solana executable account + recognized loader |
-| Cluster identity | Genesis hash + configured expected hash |
-| Price | Configured market-provider resolution |
-| Liquidity | Provider enrichment, nullable |
-| UI derived FDV | `on-chain UI supply * selected market price` |
+```text
+Observe
+  ↓
+Analyze
+  ↓
+Policy evaluation
+  ↓
+Evidence review
+  ↓
+Human approval
+  ↓
+Signer authorization
+  ↓
+Prepare
+  ↓
+Submit
+  ↓
+Confirm / EXECUTION_UNKNOWN
+  ↓
+Reconcile
+  ↓
+Ledger + receipt
+```
 
-## Failure semantics
+No UI component, wallet balance, token holding or AI recommendation can bypass this chain.
 
-- **LIVE**: authoritative dependencies are healthy and validation gates pass.
-- **DEGRADED**: usable response with freshness/divergence/confidence/cluster concerns.
-- **UNAVAILABLE**: a required upstream value cannot be resolved.
-- **UNCONFIGURED**: no production configuration exists for that capability.
+## Source-of-truth rules
 
-A degraded state is not equivalent to failure, but financial workflows should decide independently whether degraded market information is acceptable.
+- Postgres is operational truth.
+- Solana is settlement truth.
+- provider market data is analytics-only.
+- Helius DAS enriches indexing but does not replace RPC authority.
+- large/sensitive evidence remains off-chain with content hashes and verification metadata.

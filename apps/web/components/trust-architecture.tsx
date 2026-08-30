@@ -10,8 +10,8 @@ const stages=[
 ];
 export function TrustArchitecture(){
  return <section className="section architecture-section"><div className="shell">
-   <div className="architecture-intro"><span className="eyebrow">OPERATING ARCHITECTURE</span><h2 className="section-title">Capital state and evidence state never collapse into one number.</h2><p className="section-copy">PowerChain keeps operational truth, authorization, settlement and verified impact separate so every transition has a clear source and accountable authority.</p></div>
-   <div className="architecture-flow">{stages.map(([n,t,b],i)=><div className="architecture-stage" key={t}><span>{n}</span><strong>{t}</strong><small>{b}</small>{i<stages.length-1?<i aria-hidden="true">→</i>:null}</div>)}</div>
-   <div className="accounting-invariant"><b>RAISED</b><span>≠</span><b>AVAILABLE</b><span>≠</span><b>ALLOCATED</b><span>≠</span><b>ESCROWED</b><span>≠</span><b>RELEASED</b><span>≠</span><b>VERIFIED IMPACT</b></div>
+  <div className="architecture-intro"><span className="eyebrow">OPERATING MODEL</span><h2 className="section-title">A controlled path from crisis signal to verified impact.</h2><p className="section-copy">Every stage has a distinct responsibility, evidence boundary and authority gate. Connectors represent progression—not equivalence between states.</p></div>
+  <div className="operation-flow" role="list">{stages.map(([number,title,body],index)=><div className="operation-step-wrap" key={title} role="listitem"><article className="operation-step"><span className="operation-step-index">{number}</span><div><strong>{title}</strong><small>{body}</small></div></article>{index<stages.length-1?<div className="operation-connector" aria-hidden="true"><span/></div>:null}</div>)}</div>
+  <div className="accounting-invariant"><b>RAISED</b><span>≠</span><b>AVAILABLE</b><span>≠</span><b>ALLOCATED</b><span>≠</span><b>ESCROWED</b><span>≠</span><b>RELEASED</b><span>≠</span><b>VERIFIED IMPACT</b></div>
  </div></section>
 }

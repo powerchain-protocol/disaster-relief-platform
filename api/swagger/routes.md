@@ -1,7 +1,9 @@
 # Route Policy
 
 - `/api/v1/*` is canonical.
-- Compatibility aliases call the same implementation.
-- `/api/v1/solana/market` always requires `mint`.
-- `/api/token/market` alone may default to backend `PWRC_MINT`.
-- Provider credentials and private RPC configuration are server-only.
+- compatibility aliases reuse canonical services.
+- canonical market inspection requires an explicit mint.
+- wallet portfolio uses RPC-native SOL plus optional Helius DAS enrichment.
+- health is liveness; readiness is the deployment/release gate.
+- the Solana WebSocket is read-only.
+- provider credentials, RPC URLs, internal tokens and signing material stay server-side.

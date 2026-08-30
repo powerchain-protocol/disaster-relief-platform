@@ -11,6 +11,7 @@ type InjectedWallet = {
   isConnected?: boolean;
   connect(opts?: { onlyIfTrusted?: boolean }): Promise<{ publicKey?: PublicKeyLike } | void>;
   disconnect?(): Promise<void>;
+  signMessage?(message: Uint8Array, display?: "utf8" | "hex"): Promise<{ signature: Uint8Array } | Uint8Array>;
   on?(event: "accountChanged" | "disconnect", listener: (...args: unknown[]) => void): void;
   off?(event: "accountChanged" | "disconnect", listener: (...args: unknown[]) => void): void;
 };
@@ -35,6 +36,7 @@ type WalletContextValue = {
   connect(kind: WalletKind): Promise<void>;
   disconnect(): Promise<void>;
   refreshPortfolio(): Promise<void>;
+  signMessage(message: string): Promise<{ signatureBase64: string; address: string; wallet: WalletKind }>;
 };
 
 const WalletContext = createContext<WalletContextValue | null>(null);
@@ -131,11 +133,24 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
   }, [wallet, clear]);
 
   const refreshPortfolio = useCallback(async () => { if (address) await loadPortfolio(address); }, [address, loadPortfolio]);
+  const signMessage = useCallback(async (message: string) => {
+    if (!address || !wallet) throw new Error("Connect a wallet before signing.");
+    const provider = providerFor(wallet);
+    if (!provider?.signMessage) throw new Error(`${wallet} does not expose signMessage in this browser.`);
+    const encoded = new TextEncoder().encode(message);
+    const result = await provider.signMessage(encoded, "utf8");
+    const signature = result instanceof Uint8Array ? result : result.signature;
+    if (!(signature instanceof Uint8Array) || signature.byteLength !== 64) throw new Error("Wallet returned an invalid Ed25519 signature.");
+    let binary = "";
+    for (const byte of signature) binary += String.fromCharCode(byte);
+    return { signatureBase64: btoa(binary), address, wallet };
+  }, [address, wallet]);
+
 
   const value = useMemo(() => ({
     address, wallet, connected: Boolean(address), portfolio, portfolioLoading, portfolioError, installed,
-    connect, disconnect, refreshPortfolio,
-  }), [address, wallet, portfolio, portfolioLoading, portfolioError, installed, connect, disconnect, refreshPortfolio]);
+    connect, disconnect, refreshPortfolio, signMessage,
+  }), [address, wallet, portfolio, portfolioLoading, portfolioError, installed, connect, disconnect, refreshPortfolio, signMessage]);
 
   return <WalletContext.Provider value={value}>{children}</WalletContext.Provider>;
 }

@@ -1,20 +1,2 @@
-const partnerTypes = [
-  ["Relief organizations", "Coordinate verified funding, evidence and milestone-based disbursement."],
-  ["Governments & agencies", "Use policy-bound funding and public transparency without exposing signing authority."],
-  ["Infrastructure providers", "Connect RPC, oracle, payments, identity and evidence systems through controlled adapters."],
-  ["Capital partners", "Track capital state, reconciliation and verified outcomes across the response lifecycle."],
-];
-
-export function Partnership() {
-  return (
-    <section id="partnerships" className="section partnership-section">
-      <div className="shell">
-        <div className="section-head-row">
-          <div><span className="eyebrow">PARTNERSHIPS</span><h2 className="section-title">Built to integrate with the institutions already doing the work.</h2></div>
-          <a className="button secondary" href="/about#contact">Partnership enquiries</a>
-        </div>
-        <div className="partnership-grid">{partnerTypes.map(([t,b]) => <article key={t}><span className="feature-mark">↗</span><h3>{t}</h3><p>{b}</p></article>)}</div>
-      </div>
-    </section>
-  );
-}
+const groups=[["Relief Organizations","Coordinate funding, approvals, evidence and milestone-based releases."],["Governments & Agencies","Operate policy-bound capital with public transparency and controlled signing authority."],["Capital Partners","Track capital state, reconciliation and verified outcomes across the response lifecycle."],["Infrastructure Providers","Connect RPC, oracle, payments, identity and evidence systems through bounded adapters."]];
+export function Partnership(){return <section id="partnerships" className="reference-partnership-section"><div className="shell"><div className="reference-section-head"><div><span className="eyebrow">PARTNERSHIPS</span><h2>Built to integrate with institutions already doing the work.</h2></div><a className="button reference-secondary" href="/about#contact">Partnership enquiries</a></div><div className="reference-partnership-grid">{groups.map(([title,body])=><article key={title}><span>↗</span><h3>{title}</h3><p>{body}</p></article>)}</div></div></section>}

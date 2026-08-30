@@ -1,9 +1,21 @@
-# API Fallback Policy
+# Fallback and Degradation Policy
 
-Fallback is resilience, not authority.
+Fallback exists to preserve availability without weakening truth.
 
-- **RPC:** bounded failover across configured RPC endpoints; cluster/genesis policy still applies.
-- **Market:** configured provider priority may fall through Pyth, Jupiter, CoinGecko, CoinMarketCap, Birdeye, and Helius enrichment. RPC supply/decimals remain authoritative.
-- **Programs:** no fallback program ID. Required IDs/fingerprints must verify on-chain.
-- **Compatibility:** aliases call canonical services and do not implement separate business logic.
-- **Unavailable:** never invent price, balance, supply, transaction, deployment, or provider state; never substitute demo data in live mode.
+| Domain | Allowed degradation | Forbidden behavior |
+| --- | --- | --- |
+| Solana RPC | bounded configured endpoint failover | silently switching network/genesis |
+| Helius | omit DAS enrichment | invent wallet assets |
+| Pyth/Jupiter/Birdeye/CoinGecko | provider priority/fallback | overwrite authoritative supply or balances |
+| Program registry | show unconfigured/not found | substitute another program ID |
+| WebSocket | reconnect with capped backoff | infer chain failure from socket loss |
+| Dashboard | stale/degraded/unavailable state | fill cards with fake zeroes |
+| Settlement | re-observe/reconcile | resubmit `EXECUTION_UNKNOWN` as a new payment |
+
+## Freshness
+
+Every provider-backed observation should expose or preserve a freshness signal. A technically successful HTTP request can still be operationally degraded if its source is stale, divergent or below quorum.
+
+## Release safety
+
+Release and deployment gates must use raw readiness/quorum state, not presentation hysteresis.

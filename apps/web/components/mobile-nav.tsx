@@ -9,7 +9,6 @@ const links = [
   ["/status", "Status"],
   ["/docs", "Documentation"],
   ["/docs/whitepaper.pdf", "Whitepaper"],
-  ["/legal", "Legal"],
 ];
 
 export function MobileNav() {

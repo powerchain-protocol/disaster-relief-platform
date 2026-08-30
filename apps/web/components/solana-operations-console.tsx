@@ -4,12 +4,15 @@ import type { PowerChainProviderStatus, SolanaAssetResponse, SolanaMarketRespons
 import { powerChainApi } from "../lib/api";
 import { usePollingResource } from "../hooks/use-polling-resource";
 import { StatusBadge } from "./status-badge";
+import { useSolanaStream } from "../hooks/use-solana-stream";
+import { ActivityLogIcon } from "@radix-ui/react-icons";
 
 const compact=(value:string|null|undefined)=>value?`${value.slice(0,6)}…${value.slice(-6)}`:"—";
 const number=(value:number|null|undefined,digits=2)=>value==null?"—":new Intl.NumberFormat("en-US",{maximumFractionDigits:digits}).format(value);
 const when=(value:string|null|undefined)=>value?new Intl.DateTimeFormat("en-US",{hour:"2-digit",minute:"2-digit",second:"2-digit"}).format(new Date(value)):"—";
 
 export function SolanaOperationsConsole(){
+  const stream=useSolanaStream(true);
   const overviewLoader=useCallback(()=>powerChainApi.solanaOverview(),[]);
   const programsLoader=useCallback(()=>powerChainApi.solanaPrograms(),[]);
   const providersLoader=useCallback(()=>powerChainApi.providerStatus(),[]);
@@ -22,6 +25,11 @@ export function SolanaOperationsConsole(){
   const providerRows=useMemo(()=>Object.entries((market?.observations??[]).reduce<Record<string,string>>((acc,item)=>{acc[item.provider]=item.source.state;return acc;},{})),[market]);
   async function inspect(){const value=mint.trim();if(!value)return;setLooking(true);setLookupError(null);try{const [m,a]=await Promise.all([powerChainApi.solanaMarket(value),powerChainApi.solanaAsset(value)]);setMarket(m);setAsset(a);}catch(error){setLookupError(error instanceof Error?error.message:"Lookup failed");setMarket(null);setAsset(null);}finally{setLooking(false)}}
   return <div className="console-stack">
+    <div className="dashboard-operation-strip">
+      <div><ActivityLogIcon/><span><small>REALTIME</small><b>{stream.state}</b></span></div>
+      <div><small>LAST STREAM</small><b>{stream.lastMessageAt?when(stream.lastMessageAt):"Waiting"}</b></div>
+      <div><small>STREAM ERROR</small><b>{stream.lastError??"None"}</b></div>
+    </div>
     <section className="panel" aria-labelledby="cluster-heading"><PanelHeader eyebrow="SOLANA CLUSTER" title="Network state" status={overview.data?.status} refreshing={overview.refreshing} onRefresh={()=>void overview.refresh()}/>
       {overview.error?<ResourceWarning error={overview.error} stale={overview.stale} failures={overview.failureCount}/>:null}
       {overview.loading&&!overview.data?<LoadingRows/>:<div className="metrics">
