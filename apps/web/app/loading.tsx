@@ -1,0 +1,1 @@
+export default function Loading(){return <main className="route-state"><div className="route-state-card"><span className="route-spinner"/><div><strong>Loading PowerChain Relief</strong><p>Resolving the requested product surface.</p></div></div></main>}

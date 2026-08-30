@@ -1,0 +1,132 @@
+{
+  "schemaVersion": "1.0.0",
+  "releaseVersion": "1.0.0",
+  "recordedAt": "<ISO-8601>",
+  "deploymentId": "<immutable deployment id>",
+  "environment": "production",
+  "commitSha": "<git sha>",
+  "images": {
+    "api": "sha256:<digest>",
+    "web": "sha256:<digest>"
+  },
+  "dependencyLock": {
+    "algorithm": "sha256",
+    "digest": "<digest>"
+  },
+  "artifacts": {
+    "sbom": {
+      "format": "CycloneDX-1.5",
+      "sha256": "<digest>",
+      "componentCount": 0
+    },
+    "provenance": {
+      "sha256": "<digest>",
+      "payloadSha256": "<digest>"
+    },
+    "releasePolicy": {
+      "sha256": "<digest>",
+      "policyFileSha256": "<digest>",
+      "policyPayloadSha256": "<digest>"
+    },
+    "programChangeControl": {
+      "sha256": "<digest>",
+      "mode": "NO_PROGRAM_FINGERPRINT_CHANGE"
+    },
+    "canary": {
+      "sha256": "<digest>",
+      "samples": 6,
+      "successRatio": 1
+    }
+  },
+  "config": {
+    "algorithm": "sha256",
+    "digest": "<digest>",
+    "source": "<approved config revision>",
+    "secretsIncluded": false
+  },
+  "cluster": {
+    "intended": "mainnet-beta",
+    "observed": "mainnet-beta",
+    "genesisHash": "<observed>",
+    "expectedGenesisHash": "<expected>"
+  },
+  "programs": [
+    {
+      "slug": "launchpad-registry",
+      "programId": "<address>",
+      "state": "DEPLOYED",
+      "deploymentVerified": true,
+      "deploymentFingerprintSha256": "<64-hex>",
+      "programDataAddress": "<address-or-null>",
+      "lastDeploySlot": 0,
+      "upgradeAuthority": "<address-or-null>"
+    }
+  ],
+  "providers": [
+    {
+      "provider": "SOLANA_RPC",
+      "required": true,
+      "state": "LIVE",
+      "fresh": true,
+      "ageSeconds": 0,
+      "freshnessLimitSeconds": 180,
+      "lastCheckedAt": "<ISO-8601>"
+    }
+  ],
+  "providerQuorum": {
+    "required": 2,
+    "observed": 2,
+    "rawMet": true,
+    "effectiveMet": true,
+    "met": true
+  },
+  "rollback": {
+    "mode": "ROLLBACK_TARGET_VERIFIED",
+    "target": {},
+    "recordSha256": "<digest>"
+  },
+  "previousEvidence": {
+    "deploymentId": "<previous>",
+    "fileSha256": "<digest>",
+    "payloadSha256": "<digest>",
+    "source": "<path>"
+  },
+  "approvals": {
+    "status": "APPROVED",
+    "recordSha256": "<digest>",
+    "approvers": []
+  },
+  "validation": {
+    "predeploy": {
+      "result": "PASS",
+      "reportSha256": "<digest>"
+    },
+    "liveVerification": {
+      "result": "PASS",
+      "reportSha256": "<digest>"
+    },
+    "frozenInstall": "PASS",
+    "typecheck": "PASS",
+    "test": "PASS",
+    "build": "PASS",
+    "releaseArtifacts": "PASS",
+    "releasePolicy": "PASS",
+    "productionConfig": "PASS",
+    "browserSecrets": "PASS",
+    "runbookRollbackApproval": "PASS",
+    "rollbackTarget": "PASS",
+    "programChangeControl": "PASS",
+    "canary": "PASS",
+    "readiness": "PASS",
+    "slo": "PASS",
+    "requiredPrograms": "PASS",
+    "programFingerprints": "PASS",
+    "providerTelemetry": "PASS",
+    "providerQuorum": "PASS"
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "payloadSha256": "<canonical-payload-digest>",
+    "previousPayloadSha256": "<previous-payload-digest-or-null>"
+  }
+}

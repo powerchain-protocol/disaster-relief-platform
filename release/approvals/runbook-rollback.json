@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "1.0.0",
+  "releaseVersion": "1.0.0",
+  "status": "PENDING",
+  "runbookSha256": "97ef4784ca70752adb82858671eb806f27b013f51a8b475ce66c54d5a0f8c8bf",
+  "rollbackSha256": "dd8537bc925dd5a3303eaa2e38c9c7ef7c3e3435b4560279cbff7cdde651d2a9",
+  "approvers": [],
+  "notes": "Populate authorized approver identity and approvedAt, then set status to APPROVED. Any runbook or rollback edit invalidates this record."
+}

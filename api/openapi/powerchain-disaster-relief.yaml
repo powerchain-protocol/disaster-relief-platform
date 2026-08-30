@@ -1,0 +1,195 @@
+openapi: 3.1.0
+info:
+  title: PowerChain Disaster Relief API
+  version: 1.0.0
+  description: Canonical PowerChain Crisis / Disaster Relief API. Canonical v1 routes
+    are authoritative. Compatibility aliases call the same service implementation.
+    RPC and market-provider fallback are bounded internal resilience mechanisms; they
+    never change on-chain authority or fabricate missing data.
+servers:
+- url: /
+  description: Current API origin
+tags:
+- name: System
+- name: Solana
+- name: Compatibility
+paths:
+  /api/v1/health:
+    get:
+      tags:
+      - System
+      operationId: getHealth
+      summary: Process liveness
+      responses:
+        '200':
+          description: API process is alive
+  /api/v1/ready:
+    get:
+      tags:
+      - System
+      operationId: getReadiness
+      summary: Strict dependency and production readiness
+      responses:
+        '200':
+          description: All strict-readiness requirements pass
+        '503':
+          description: One or more strict-readiness requirements fail
+  /api/v1/config/public:
+    get:
+      tags:
+      - System
+      operationId: getPublicConfig
+      summary: Public non-secret runtime capabilities
+      responses:
+        '200':
+          description: Public runtime configuration
+  /api/v1/providers/status:
+    get:
+      tags:
+      - System
+      operationId: getProviderStatus
+      summary: Redacted provider health, freshness and quorum
+      responses:
+        '200':
+          description: Provider telemetry without credentials or private endpoints
+  /api/v1/observability/slo:
+    get:
+      tags:
+      - System
+      operationId: getSlo
+      summary: Rolling SLO and error-budget state
+      responses:
+        '200':
+          description: Availability, latency and error-budget snapshot
+  /api/v1/openapi.json:
+    get:
+      tags:
+      - System
+      operationId: getRuntimeOpenApi
+      summary: Runtime-generated OpenAPI document
+      responses:
+        '200':
+          description: Runtime API contract
+  /api/v1/solana/overview:
+    get:
+      tags:
+      - Solana
+      operationId: getSolanaOverview
+      summary: Solana RPC and cluster overview
+      responses:
+        '200':
+          description: Cluster health, slot, block height, epoch, version, blockhash
+            and RPC telemetry
+        '503':
+          description: Authoritative cluster state unavailable
+      description: RPC failover may switch only among configured endpoints bound to
+        the intended cluster/genesis policy.
+  /api/v1/solana/programs:
+    get:
+      tags:
+      - Solana
+      operationId: getSolanaPrograms
+      summary: Verify configured PowerChain programs
+      responses:
+        '200':
+          description: Program verification states and fingerprints
+        '503':
+          description: Required program verification unavailable or failed
+      description: No fallback program ID is permitted. Production may pin executable
+        SHA-256 fingerprints.
+  /api/v1/solana/market:
+    get:
+      tags:
+      - Solana
+      operationId: getSolanaMarket
+      summary: Resolve source-aware market data for an explicit mint
+      responses:
+        '200':
+          description: Selected observation plus provider observations and validation
+            metadata
+        '400':
+          description: Missing or invalid mint
+        '503':
+          description: Market data unavailable
+      description: Market providers may fall back by configured priority. RPC supply
+        and decimals remain authoritative.
+      parameters:
+      - in: query
+        name: mint
+        required: true
+        schema:
+          type: string
+          minLength: 32
+          maxLength: 44
+  /api/v1/solana/assets/{mint}:
+    get:
+      tags:
+      - Solana
+      operationId: getSolanaAsset
+      summary: Inspect SPL or Token-2022 mint
+      responses:
+        '200':
+          description: Supply, decimals, authorities, Token-2022 extensions and optional
+            metadata
+        '400':
+          description: Invalid mint
+        '503':
+          description: Authoritative mint state unavailable
+      description: RPC is authoritative; optional metadata enrichment cannot overwrite
+        authoritative fields.
+      parameters:
+      - in: path
+        name: mint
+        required: true
+        schema:
+          type: string
+          minLength: 32
+          maxLength: 44
+  /api/solana/overview:
+    get:
+      tags:
+      - Compatibility
+      operationId: getSolanaOverviewCompatibility
+      summary: Compatibility alias for Solana overview
+      responses:
+        '200':
+          description: Same service implementation as /api/v1/solana/overview
+      deprecated: true
+  /api/token/market:
+    get:
+      tags:
+      - Compatibility
+      operationId: getTokenMarketCompatibility
+      summary: Compatibility market alias
+      responses:
+        '200':
+          description: Same market service as canonical v1
+        '400':
+          description: Neither mint nor server PWRC_MINT is configured
+        '503':
+          description: Market data unavailable
+      description: Calls the canonical market service and may use backend PWRC_MINT
+        when mint is omitted.
+      parameters:
+      - in: query
+        name: mint
+        required: false
+        schema:
+          type: string
+      deprecated: true
+  /api/assets/{mint}:
+    get:
+      tags:
+      - Compatibility
+      operationId: getAssetCompatibility
+      summary: Compatibility alias for asset inspection
+      responses:
+        '200':
+          description: Same service implementation as /api/v1/solana/assets/{mint}
+      parameters:
+      - in: path
+        name: mint
+        required: true
+        schema:
+          type: string
+      deprecated: true

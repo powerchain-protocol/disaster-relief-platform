@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "1.0.0",
+  "releaseVersion": "1.0.0",
+  "kind": "HERMETIC_RELEASE_VALIDATION",
+  "generatedAt": "2026-08-29T03:00:07.709067Z",
+  "scope": "source-and-deterministic-mock-runtime",
+  "summary": "Release acceptance is fully wired. Hermetic integration passes; externally dependent production gates remain blocked until real release inputs exist.",
+  "gates": {
+    "sourceRuntimeSuite": {
+      "status": "PASS",
+      "evidence": "tests/invariants.mjs, security.mjs, charts.mjs, solana-api.mjs, solana-runtime.mjs, full-stack.mjs, documentation.mjs"
+    },
+    "hermeticClusterProgramProviderIntegration": {
+      "status": "PASS",
+      "evidence": "tests/release-integration.mjs"
+    },
+    "browserSourceSecretPreflight": {
+      "status": "PASS",
+      "evidence": "scripts/check-browser-secrets.mjs without --require-build"
+    },
+    "frozenDependencyInstall": {
+      "status": "BLOCKED",
+      "reason": "No genuine pnpm-lock.yaml is present and pnpm registry access is unavailable in this runtime."
+    },
+    "dependencyBackedTypecheckTestBuild": {
+      "status": "BLOCKED",
+      "reason": "Frozen dependency install has not completed in this runtime."
+    },
+    "productionConfigurationGate": {
+      "status": "BLOCKED",
+      "reason": "Runtime is Node 22.16.0 and production deployment environment values are intentionally absent."
+    },
+    "liveReadinessIntendedCluster": {
+      "status": "BLOCKED",
+      "reason": "No deployed production API origin/private RPC configuration is available."
+    },
+    "liveRequiredProgramVerification": {
+      "status": "BLOCKED",
+      "reason": "No real PowerChain Launchpad production program IDs/deployment evidence are configured."
+    },
+    "liveProviderCredentialsTelemetry": {
+      "status": "BLOCKED",
+      "reason": "Real production provider credentials are not available in this artifact runtime."
+    },
+    "browserBundleSecretScan": {
+      "status": "BLOCKED",
+      "reason": "A dependency-backed Next.js production build does not exist yet; source preflight passes."
+    },
+    "runbookRollbackApproval": {
+      "status": "BLOCKED",
+      "reason": "release/approvals/runbook-rollback.json is PENDING and requires an authorized human approver."
+    },
+    "deploymentEvidenceRecord": {
+      "status": "BLOCKED",
+      "reason": "Requires commit SHA, lockfile hash, immutable image digests, live verification and approved runbook/rollback."
+    },
+    "releaseEvidenceChainRuntime": {
+      "status": "PASS",
+      "evidence": "tests/release-evidence-runtime.mjs; live verifier -> deployment evidence writer -> evidence verifier"
+    }
+  },
+  "nonProductionFixtureWarning": "Program addresses used by tests/release-integration.mjs are deterministic test fixtures and must never be interpreted as deployed PowerChain program IDs."
+}

@@ -1,0 +1,8 @@
+{
+  "version": "1.0.0",
+  "routes": [
+    {"id":"cctp-usdc","provider":"CCTP_V2","asset":"USDC","status":"DISABLED","reason":"Deployment-specific domains, fees and credentials must be verified before activation."},
+    {"id":"ccip-approved-lane","provider":"CCIP","asset":"CONFIGURED","status":"DISABLED","reason":"Router, pool/lane, allowlists, rate limits and audit required."},
+    {"id":"wpwrc-sui","provider":"POWERCHAIN_WPWRC","asset":"PWRC","status":"TBA","reason":"Two-way audited bridge and supply reconciliation not yet a production fact."}
+  ]
+}

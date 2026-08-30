@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "1.0.0",
+  "releaseVersion": "1.0.0",
+  "status": "PENDING",
+  "changes": [],
+  "approvers": [],
+  "notes": "Required only when an upgrade changes a pinned required-program executable fingerprint. The approved record must list every from/to fingerprint change."
+}

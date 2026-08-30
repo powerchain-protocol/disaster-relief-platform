@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "1.0.0",
+  "releaseVersion": "1.0.0",
+  "status": "PENDING",
+  "runbookSha256": "<sha256-of-docs/OPERATIONS_RUNBOOK.md>",
+  "rollbackSha256": "<sha256-of-docs/ROLLBACK.md>",
+  "approvers": [
+    {
+      "name": "<authorized release approver>",
+      "role": "<role>",
+      "approvedAt": "<ISO-8601 timestamp>"
+    }
+  ],
+  "notes": "Approval is invalid after either document changes."
+}

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.0.0",
+  "releaseVersion": "1.0.0",
+  "status": "APPROVED",
+  "changes": [
+    {
+      "slug": "token-factory",
+      "from": "<previous 64-hex sha256>",
+      "to": "<new 64-hex sha256>",
+      "reason": "Reviewed program upgrade"
+    }
+  ],
+  "approvers": [
+    {
+      "name": "Authorized release approver",
+      "approvedAt": "2026-08-29T00:00:00Z"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "name": "@powerchain/crisis-web",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 3000",
+    "build": "next build",
+    "start": "next start --port 3000",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "prebuild": "pnpm --filter @powerchain/crisis-api-client build",
+    "pretypecheck": "pnpm --filter @powerchain/crisis-api-client build"
+  },
+  "dependencies": {
+    "@powerchain/crisis-api-client": "workspace:*",
+    "next": "16.3.2",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@types/node": "24.13.2",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.5",
+    "typescript": "7.0.2"
+  },
+  "description": "Public website and same-origin Solana operations console for PowerChain Crisis.",
+  "author": "PowerChain Protocol",
+  "license": "MIT"
+}

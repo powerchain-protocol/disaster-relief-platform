@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "1.0.0",
+  "networkSource": "SOLANA_NETWORK",
+  "programs": [
+    {
+      "slug": "launchpad-registry",
+      "name": "Launchpad Registry",
+      "environmentVariable": "SOLANA_LAUNCHPAD_REGISTRY_PROGRAM_ID",
+      "required": true
+    },
+    {
+      "slug": "launch-policy",
+      "name": "Launch Policy",
+      "environmentVariable": "SOLANA_LAUNCH_POLICY_PROGRAM_ID",
+      "required": true
+    },
+    {
+      "slug": "token-factory",
+      "name": "Token Factory",
+      "environmentVariable": "SOLANA_TOKEN_FACTORY_PROGRAM_ID",
+      "required": true
+    },
+    {
+      "slug": "token-2022-vesting",
+      "name": "Token-2022 Vesting",
+      "environmentVariable": "SOLANA_TOKEN_2022_VESTING_PROGRAM_ID",
+      "required": false
+    },
+    {
+      "slug": "launchpad-escrow",
+      "name": "Launchpad Escrow",
+      "environmentVariable": "SOLANA_LAUNCHPAD_ESCROW_PROGRAM_ID",
+      "required": false
+    },
+    {
+      "slug": "crisis-fundings",
+      "name": "Crisis Funding",
+      "environmentVariable": "SOLANA_FUNDINGS_PROGRAM_ID",
+      "required": false
+    },
+    {
+      "slug": "stablecoin",
+      "name": "Stablecoin",
+      "environmentVariable": "SOLANA_STABLECOIN_PROGRAM_ID",
+      "required": false
+    },
+    {
+      "slug": "oracles",
+      "name": "Oracles",
+      "environmentVariable": "SOLANA_ORACLES_PROGRAM_ID",
+      "required": false
+    },
+    {
+      "slug": "supply-chain",
+      "name": "Supply Chain",
+      "environmentVariable": "SOLANA_SUPPLY_CHAIN_PROGRAM_ID",
+      "required": false
+    }
+  ]
+}

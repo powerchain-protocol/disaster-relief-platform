@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "1.0.0",
+  "apiVersion": "v1",
+  "canonicalPrefix": "/api/v1",
+  "fallbackPolicy": {
+    "routeFallback": "DISABLED",
+    "rpcFailover": "BOUNDED_CONFIGURED_POOL",
+    "marketProviderFallback": "CONFIGURED_PRIORITY",
+    "programIdFallback": "DISABLED",
+    "authoritativeDataFallback": "DISABLED",
+    "demoFallbackInLiveMode": "DISABLED"
+  },
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/api/v1/health",
+      "domain": "system",
+      "canonical": true,
+      "fallback": "none"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/ready",
+      "domain": "system",
+      "canonical": true,
+      "fallback": "none"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/config/public",
+      "domain": "system",
+      "canonical": true,
+      "fallback": "none"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/providers/status",
+      "domain": "system",
+      "canonical": true,
+      "fallback": "provider telemetry only"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/observability/slo",
+      "domain": "system",
+      "canonical": true,
+      "fallback": "none"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/openapi.json",
+      "domain": "system",
+      "canonical": true,
+      "fallback": "none"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/solana/overview",
+      "domain": "solana",
+      "canonical": true,
+      "fallback": "RPC pool only"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/solana/programs",
+      "domain": "solana",
+      "canonical": true,
+      "fallback": "RPC pool only; no program ID fallback"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/solana/market?mint=<address>",
+      "domain": "solana",
+      "canonical": true,
+      "fallback": "market provider priority; RPC supply remains authoritative"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/solana/assets/:mint",
+      "domain": "solana",
+      "canonical": true,
+      "fallback": "RPC pool + optional metadata enrichment"
+    },
+    {
+      "method": "GET",
+      "path": "/api/solana/overview",
+      "domain": "compatibility",
+      "canonical": false,
+      "successor": "/api/v1/solana/overview",
+      "fallback": "same canonical service"
+    },
+    {
+      "method": "GET",
+      "path": "/api/token/market?mint=<address>",
+      "domain": "compatibility",
+      "canonical": false,
+      "successor": "/api/v1/solana/market?mint=<address>",
+      "fallback": "may default missing mint to server PWRC_MINT"
+    },
+    {
+      "method": "GET",
+      "path": "/api/assets/:mint",
+      "domain": "compatibility",
+      "canonical": false,
+      "successor": "/api/v1/solana/assets/:mint",
+      "fallback": "same canonical service"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/wallet/:address/portfolio",
+      "domain": "wallet",
+      "canonical": true,
+      "auth": "internal-token-optional",
+      "fallback": "SOL balance via RPC; fungible assets via Helius DAS when configured"
+    }
+  ]
+}

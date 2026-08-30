@@ -1,0 +1,10 @@
+{
+  "slug": "launch-policy",
+  "name": "Launch Policy",
+  "environmentVariable": "SOLANA_LAUNCH_POLICY_PROGRAM_ID",
+  "requiredForStrictReadiness": true,
+  "programId": null,
+  "deploymentFingerprintSha256": null,
+  "status": "CONFIGURED_AT_DEPLOYMENT",
+  "note": "Production IDs and executable fingerprints are runtime/deployment evidence, not source defaults."
+}

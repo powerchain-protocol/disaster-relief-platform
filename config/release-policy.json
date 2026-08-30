@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "1.0.0",
+  "releaseVersion": "1.0.0",
+  "runtime": {
+    "nodeMinimum": "24.20.0",
+    "pnpm": "11.24.0"
+  },
+  "cluster": {
+    "production": "mainnet-beta",
+    "requireGenesisPin": true
+  },
+  "rpc": {
+    "circuitFailureThreshold": 3,
+    "circuitCooldownMs": 30000,
+    "maxFailoverAttempts": 3
+  },
+  "providers": {
+    "minimumMarketQuorum": 2,
+    "telemetryMaxAgeSeconds": 180,
+    "quorumFailureHysteresis": 2,
+    "quorumRecoveryHysteresis": 2
+  },
+  "slo": {
+    "windowSeconds": 300,
+    "availabilityTargetPct": 99.5,
+    "p95TargetMs": 1500,
+    "minimumSamples": 6
+  },
+  "canary": {
+    "minimumSamples": 6,
+    "minimumSuccessRatio": 1,
+    "maximumConsecutiveFailures": 0
+  },
+  "programs": {
+    "required": [
+      "launchpad-registry",
+      "launch-policy",
+      "token-factory"
+    ],
+    "requireFingerprintPin": true,
+    "requireChangeControlOnFingerprintChange": true
+  },
+  "attestation": {
+    "algorithm": "Ed25519",
+    "requiredInProduction": true
+  }
+}

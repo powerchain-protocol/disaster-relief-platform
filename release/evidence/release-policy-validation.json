@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "1.0.0",
+  "releaseVersion": "1.0.0",
+  "checkedAt": "2026-08-29T12:52:38.786Z",
+  "policyFile": "config/release-policy.json",
+  "policyFileSha256": "e87c3822d6fe284bb9914bae9817d0a53d86b4ce13eadad2d7130ce35fa0110b",
+  "policyPayloadSha256": "8b6cc43c811ad67f2acb137c37df89afad8484228f3a956bb3a678c47e5b0fe1",
+  "result": "PASS",
+  "failures": []
+}

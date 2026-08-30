@@ -1,0 +1,33 @@
+{
+  "name": "@powerchain/crisis-api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "start": "node dist/server.js",
+    "prebuild": "pnpm --filter @powerchain/crisis-api-contract build",
+    "pretypecheck": "pnpm --filter @powerchain/crisis-api-contract build"
+  },
+  "dependencies": {
+    "@fastify/cors": "11.3.0",
+    "@fastify/helmet": "13.1.1",
+    "@fastify/rate-limit": "11.2.0",
+    "@fastify/swagger": "9.8.1",
+    "@fastify/swagger-ui": "6.1.1",
+    "@fastify/websocket": "11.3.0",
+    "fastify": "5.12.1",
+    "@powerchain/crisis-api-contract": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "24.13.2",
+    "@types/ws": "8.18.1",
+    "tsx": "4.23.12",
+    "typescript": "7.0.2"
+  },
+  "description": "Canonical Fastify API runtime and Solana service implementation for PowerChain Crisis v1.0.0.",
+  "author": "PowerChain Protocol",
+  "license": "MIT"
+}

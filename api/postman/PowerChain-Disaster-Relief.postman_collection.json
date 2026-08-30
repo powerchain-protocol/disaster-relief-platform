@@ -1,0 +1,119 @@
+{
+  "info": {
+    "name": "PowerChain Disaster Relief API v1.0.0",
+    "_postman_id": "b87b2c4d-1b64-4bb3-9ca8-4e58ef8f9201",
+    "description": "Canonical v1 routes plus compatibility aliases.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:4000"
+    },
+    {
+      "key": "mint",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "System",
+      "item": [
+        {
+          "name": "Health",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/health"
+          }
+        },
+        {
+          "name": "Readiness",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/ready"
+          }
+        },
+        {
+          "name": "Providers",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/providers/status"
+          }
+        },
+        {
+          "name": "SLO",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/observability/slo"
+          }
+        },
+        {
+          "name": "OpenAPI",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/openapi.json"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Solana v1",
+      "item": [
+        {
+          "name": "Overview",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/solana/overview"
+          }
+        },
+        {
+          "name": "Programs",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/solana/programs"
+          }
+        },
+        {
+          "name": "Market",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/solana/market?mint={{mint}}"
+          }
+        },
+        {
+          "name": "Asset",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/solana/assets/{{mint}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Compatibility aliases",
+      "item": [
+        {
+          "name": "Overview alias",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/solana/overview"
+          }
+        },
+        {
+          "name": "Market alias",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/token/market?mint={{mint}}"
+          }
+        },
+        {
+          "name": "Asset alias",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/assets/{{mint}}"
+          }
+        }
+      ]
+    }
+  ]
+}

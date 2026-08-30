@@ -1,0 +1,10 @@
+{
+  "slug": "launchpad-registry",
+  "name": "Launchpad Registry",
+  "environmentVariable": "SOLANA_LAUNCHPAD_REGISTRY_PROGRAM_ID",
+  "requiredForStrictReadiness": true,
+  "programId": null,
+  "deploymentFingerprintSha256": null,
+  "status": "CONFIGURED_AT_DEPLOYMENT",
+  "note": "Production IDs and executable fingerprints are runtime/deployment evidence, not source defaults."
+}

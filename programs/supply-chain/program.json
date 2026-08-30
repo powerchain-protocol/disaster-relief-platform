@@ -1,0 +1,10 @@
+{
+  "slug": "supply-chain",
+  "name": "Supply Chain",
+  "environmentVariable": "SOLANA_SUPPLY_CHAIN_PROGRAM_ID",
+  "requiredForStrictReadiness": false,
+  "programId": null,
+  "deploymentFingerprintSha256": null,
+  "status": "CONFIGURED_AT_DEPLOYMENT",
+  "note": "Production IDs and executable fingerprints are runtime/deployment evidence, not source defaults."
+}

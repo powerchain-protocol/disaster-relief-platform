@@ -1,0 +1,11 @@
+packages:
+  - apps/*
+  - packages/*
+
+# pnpm 11 build-script policy. These are required by tsx/Next production builds.
+allowBuilds:
+  esbuild: true
+  sharp: true
+
+# Fail when a new dependency introduces an unreviewed install/build script.
+strictDepBuilds: true

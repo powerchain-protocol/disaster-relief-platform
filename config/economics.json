@@ -1,0 +1,35 @@
+{
+  "version": "1.0.0",
+  "pwrc": {
+    "role": "NETWORK_UTILITY",
+    "decimals": 9,
+    "pwrcPerPowerUnitReference": 10,
+    "crisisFundingRequired": false,
+    "treasuryAuthorityFromBalance": false
+  },
+  "successfulFundingCommission": {
+    "enabledByDefault": false,
+    "totalBps": 500,
+    "communityTreasuryBps": 200,
+    "ecosystemDevelopmentBps": 300,
+    "settlement": "ATOMIC_SPLIT_THEN_RECONCILE",
+    "chargedFrom": "SUCCESSFUL_POOL_PROCEEDS",
+    "contributorCheckoutChargeBps": 0,
+    "rounding": "FLOOR_ATOMIC_UNITS"
+  },
+  "tokenFactory": {
+    "creationFeeLamportsReference": "1000000000",
+    "defaultMaxWholeUnitsReference": "1000000000",
+    "automaticMint": false
+  },
+  "feeScheduleVersion": "1.0.0",
+  "serviceFee": {
+    "enabledByDefault": false,
+    "bps": "DEPLOYMENT_POLICY",
+    "disclosure": "SEPARATE_LINE_ITEM"
+  },
+  "networkFees": {
+    "solana": "ESTIMATE_BEFORE_SIGNATURE",
+    "includedInPowerChainFee": false
+  }
+}

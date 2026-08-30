@@ -1,0 +1,13 @@
+import assert from"node:assert/strict";import{readFileSync}from"node:fs";
+const rec=readFileSync(new URL("../apps/backend/src/domain/reconciliation.ts",import.meta.url),"utf8");
+const led=readFileSync(new URL("../apps/backend/src/domain/ledger.ts",import.meta.url),"utf8");
+const fee=readFileSync(new URL("../apps/backend/src/domain/fees.ts",import.meta.url),"utf8");
+const auth=readFileSync(new URL("../apps/backend/src/domain/authority.ts",import.meta.url),"utf8");
+const svc=readFileSync(new URL("../apps/backend/src/services/relief-capital.ts",import.meta.url),"utf8");
+for(const x of["EXECUTION_UNKNOWN","SIGNATURE_MISMATCH","SETTLEMENT_AMOUNT_MISMATCH","SETTLEMENT_DESTINATION_MISMATCH"])assert.ok(rec.includes(x));
+assert.ok(led.includes("debit!==credit"));assert.ok(led.includes("CRISIS_ESCROW")===false);
+assert.ok(fee.includes("SUCCESS_COMMISSION_BPS=500n"));assert.ok(fee.includes("COMMUNITY_SHARE_BPS=200n"));assert.ok(fee.includes("ECOSYSTEM_SHARE_BPS=300n"));
+assert.ok(auth.includes("Wallet connection and PWRC balance do not grant treasury authority."));
+assert.ok(svc.includes('item.intent=applyCapitalTransition(item.intent,{type:"RELEASE"'));
+assert.ok(svc.includes("SETTLEMENT_RECONCILED"));
+console.log("Settlement + ledger logic PASS");

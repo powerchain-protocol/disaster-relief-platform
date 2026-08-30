@@ -1,0 +1,3 @@
+import { SiteHeader, SiteFooter } from "../../components/site-shell";
+import { ProgramsOverview } from "../../components/programs-overview";
+export default function Page(){return <main id="main"><SiteHeader/><section className="shell page-hero"><span className="eyebrow">SOLANA PROGRAMS</span><h1>Deployment integrity is part of the product.</h1><p>PowerChain verifies configured program accounts, executable state, recognized loaders, ProgramData metadata and expected executable fingerprints before strict production readiness can pass.</p></section><section className="section section-muted"><div className="shell"><ProgramsOverview/></div></section><SiteFooter/></main>}

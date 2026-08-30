@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "1.0.0",
+  "releaseVersion": "1.0.0",
+  "mode": "predeploy",
+  "generatedAt": "2026-08-29T12:53:05.861Z",
+  "result": "FAIL",
+  "steps": [
+    {
+      "name": "dependency-lock",
+      "status": "FAIL",
+      "exitCode": 1,
+      "errorCode": null,
+      "durationMs": 23
+    },
+    {
+      "name": "frozen-install",
+      "status": "SKIPPED",
+      "exitCode": null,
+      "errorCode": "BLOCKED_BY_PRIOR_FAILURE",
+      "durationMs": 0
+    },
+    {
+      "name": "typecheck",
+      "status": "SKIPPED",
+      "exitCode": null,
+      "errorCode": "BLOCKED_BY_PRIOR_FAILURE",
+      "durationMs": 0
+    },
+    {
+      "name": "test",
+      "status": "SKIPPED",
+      "exitCode": null,
+      "errorCode": "BLOCKED_BY_PRIOR_FAILURE",
+      "durationMs": 0
+    },
+    {
+      "name": "build",
+      "status": "SKIPPED",
+      "exitCode": null,
+      "errorCode": "BLOCKED_BY_PRIOR_FAILURE",
+      "durationMs": 0
+    },
+    {
+      "name": "release-sbom",
+      "status": "SKIPPED",
+      "exitCode": null,
+      "errorCode": "BLOCKED_BY_PRIOR_FAILURE",
+      "durationMs": 0
+    },
+    {
+      "name": "release-provenance",
+      "status": "SKIPPED",
+      "exitCode": null,
+      "errorCode": "BLOCKED_BY_PRIOR_FAILURE",
+      "durationMs": 0
+    },
+    {
+      "name": "release-artifacts",
+      "status": "SKIPPED",
+      "exitCode": null,
+      "errorCode": "BLOCKED_BY_PRIOR_FAILURE",
+      "durationMs": 0
+    },
+    {
+      "name": "release-policy",
+      "status": "SKIPPED",
+      "exitCode": null,
+      "errorCode": "BLOCKED_BY_PRIOR_FAILURE",
+      "durationMs": 0
+    },
+    {
+      "name": "production-config",
+      "status": "SKIPPED",
+      "exitCode": null,
+      "errorCode": "BLOCKED_BY_PRIOR_FAILURE",
+      "durationMs": 0
+    },
+    {
+      "name": "browser-secrets",
+      "status": "SKIPPED",
+      "exitCode": null,
+      "errorCode": "BLOCKED_BY_PRIOR_FAILURE",
+      "durationMs": 0
+    },
+    {
+      "name": "runbook-rollback-approval",
+      "status": "SKIPPED",
+      "exitCode": null,
+      "errorCode": "BLOCKED_BY_PRIOR_FAILURE",
+      "durationMs": 0
+    },
+    {
+      "name": "rollback-target",
+      "status": "SKIPPED",
+      "exitCode": null,
+      "errorCode": "BLOCKED_BY_PRIOR_FAILURE",
+      "durationMs": 0
+    },
+    {
+      "name": "program-change-control",
+      "status": "SKIPPED",
+      "exitCode": null,
+      "errorCode": "BLOCKED_BY_PRIOR_FAILURE",
+      "durationMs": 0
+    }
+  ],
+  "integrity": {
+    "algorithm": "sha256",
+    "payloadSha256": "db1bc331ab83cdf93cff227e9632d728eb85242fd6af6df4447d41073fdf3849"
+  }
+}

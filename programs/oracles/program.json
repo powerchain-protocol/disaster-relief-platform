@@ -1,0 +1,10 @@
+{
+  "slug": "oracles",
+  "name": "Oracles",
+  "environmentVariable": "SOLANA_ORACLES_PROGRAM_ID",
+  "requiredForStrictReadiness": false,
+  "programId": null,
+  "deploymentFingerprintSha256": null,
+  "status": "CONFIGURED_AT_DEPLOYMENT",
+  "note": "Production IDs and executable fingerprints are runtime/deployment evidence, not source defaults."
+}

@@ -1,0 +1,81 @@
+{
+  "version": "1.0.0",
+  "visualGrammar": {
+    "connectorStyle": "ORTHOGONAL",
+    "lineWidthPx": 2,
+    "strongLineWidthPx": 2.5,
+    "arrowHeadPx": 8,
+    "connectorRadiusPx": 10,
+    "edgeLabels": true,
+    "edgeStateIndependentFromNodeState": true,
+    "sourceMetadataFooter": true,
+    "noGradients": true,
+    "mobileDirection": "VERTICAL"
+  },
+  "statusVocabulary": [
+    "LIVE",
+    "DEMO",
+    "STATIC",
+    "DEGRADED",
+    "TBA",
+    "UNAVAILABLE"
+  ],
+  "pointQualityVocabulary": [
+    "verified",
+    "estimated",
+    "stale",
+    "missing"
+  ],
+  "demoFixtures": {
+    "nepalFloodResponse": {
+      "label": "DEMO ONLY",
+      "source": "Nepal Flood Response product fixture",
+      "sourceId": "fixture:nepal-flood-response",
+      "raisedUsd": 4280000,
+      "allocatedUsd": 3710000,
+      "escrowUsd": 770000,
+      "verifiedImpactUsd": 2940000,
+      "categoriesUsd": {
+        "water": 1200000,
+        "medical": 1700000,
+        "shelter": 900000,
+        "logistics": 480000
+      }
+    }
+  },
+  "productionDataRule": "MAINNET_UI_MUST_USE_AUTHORITATIVE_SOURCE_OR_EXPLICIT_UNAVAILABLE_STATE",
+  "solanaMarketData": {
+    "onChainTruth": {
+      "provider": "SOLANA_RPC",
+      "method": "getTokenSupply",
+      "fields": [
+        "supplyAtomic",
+        "decimals",
+        "uiAmountString"
+      ]
+    },
+    "priceReference": {
+      "provider": "JUPITER_PRICE_V3",
+      "fields": [
+        "usdPrice",
+        "priceChange24h",
+        "blockId",
+        "decimals"
+      ]
+    },
+    "liquidityEnrichment": {
+      "provider": "JUPITER_TOKENS_V2",
+      "fields": [
+        "liquidityUsd"
+      ],
+      "missingValue": "null"
+    },
+    "validation": [
+      "MINT_IS_32_BYTE_BASE58",
+      "DECIMALS_MATCH_RPC",
+      "PRICE_BLOCK_LAG_BOUNDED",
+      "PROVIDER_DIVERGENCE_BOUNDED"
+    ],
+    "executionRule": "DISPLAY_PRICE_NEVER_AUTHORIZES_TREASURY_OR_PAYMENT_EXECUTION"
+  }
+}
