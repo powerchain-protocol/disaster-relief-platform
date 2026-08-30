@@ -32,3 +32,8 @@ Track at minimum:
 - program verification;
 - WebSocket reconnect/error rate;
 - reconciliation exceptions.
+
+
+## Program release gate
+
+Production requires all registry entries marked `REQUIRED` to be configured, executable, loader-valid and fingerprint-pinned. Optional programs may gate individual capabilities but do not globally block readiness unless policy elevates them.

@@ -1,60 +1,180 @@
 {
-  "schemaVersion": "1.0.0",
+  "schemaVersion": "1.1.0",
+  "productVersion": "1.0.0",
   "networkSource": "SOLANA_NETWORK",
+  "verification": {
+    "programIdEncoding": "base58-32-byte",
+    "requireExecutableAccount": true,
+    "recognizedLoaders": [
+      "BPFLoader1111111111111111111111111111111111",
+      "BPFLoader2111111111111111111111111111111111",
+      "BPFLoaderUpgradeab1e11111111111111111111111"
+    ],
+    "productionFingerprintPolicy": "PINNED_SHA256",
+    "unknownRequiredProgramPolicy": "NOT_READY"
+  },
   "programs": [
     {
       "slug": "launchpad-registry",
       "name": "Launchpad Registry",
+      "family": "registry",
+      "authorityDomain": "PLATFORM_REGISTRY",
       "environmentVariable": "SOLANA_LAUNCHPAD_REGISTRY_PROGRAM_ID",
-      "required": true
+      "fingerprintEnvironmentVariable": "SOLANA_LAUNCHPAD_REGISTRY_PROGRAM_FINGERPRINT_SHA256",
+      "readinessClass": "REQUIRED",
+      "requiredForStrictReadiness": true,
+      "verification": [
+        "CONFIGURED",
+        "ACCOUNT_EXISTS",
+        "EXECUTABLE",
+        "LOADER_RECOGNIZED",
+        "FINGERPRINT_MATCH_IF_PINNED"
+      ],
+      "deploymentEvidenceRequiredInProduction": true
     },
     {
       "slug": "launch-policy",
       "name": "Launch Policy",
+      "family": "policy",
+      "authorityDomain": "POLICY_CONTROL",
       "environmentVariable": "SOLANA_LAUNCH_POLICY_PROGRAM_ID",
-      "required": true
+      "fingerprintEnvironmentVariable": "SOLANA_LAUNCH_POLICY_PROGRAM_FINGERPRINT_SHA256",
+      "readinessClass": "REQUIRED",
+      "requiredForStrictReadiness": true,
+      "verification": [
+        "CONFIGURED",
+        "ACCOUNT_EXISTS",
+        "EXECUTABLE",
+        "LOADER_RECOGNIZED",
+        "FINGERPRINT_MATCH_IF_PINNED"
+      ],
+      "deploymentEvidenceRequiredInProduction": true
     },
     {
       "slug": "token-factory",
       "name": "Token Factory",
+      "family": "tokenization",
+      "authorityDomain": "ASSET_ISSUANCE",
       "environmentVariable": "SOLANA_TOKEN_FACTORY_PROGRAM_ID",
-      "required": true
+      "fingerprintEnvironmentVariable": "SOLANA_TOKEN_FACTORY_PROGRAM_FINGERPRINT_SHA256",
+      "readinessClass": "REQUIRED",
+      "requiredForStrictReadiness": true,
+      "verification": [
+        "CONFIGURED",
+        "ACCOUNT_EXISTS",
+        "EXECUTABLE",
+        "LOADER_RECOGNIZED",
+        "FINGERPRINT_MATCH_IF_PINNED"
+      ],
+      "deploymentEvidenceRequiredInProduction": true
     },
     {
       "slug": "token-2022-vesting",
       "name": "Token-2022 Vesting",
+      "family": "tokenization",
+      "authorityDomain": "VESTING",
       "environmentVariable": "SOLANA_TOKEN_2022_VESTING_PROGRAM_ID",
-      "required": false
+      "fingerprintEnvironmentVariable": "SOLANA_TOKEN_2022_VESTING_PROGRAM_FINGERPRINT_SHA256",
+      "readinessClass": "OPTIONAL",
+      "requiredForStrictReadiness": false,
+      "verification": [
+        "CONFIGURED",
+        "ACCOUNT_EXISTS",
+        "EXECUTABLE",
+        "LOADER_RECOGNIZED",
+        "FINGERPRINT_MATCH_IF_PINNED"
+      ],
+      "deploymentEvidenceRequiredInProduction": false
     },
     {
       "slug": "launchpad-escrow",
       "name": "Launchpad Escrow",
+      "family": "escrow",
+      "authorityDomain": "CAPITAL_ESCROW",
       "environmentVariable": "SOLANA_LAUNCHPAD_ESCROW_PROGRAM_ID",
-      "required": false
+      "fingerprintEnvironmentVariable": "SOLANA_LAUNCHPAD_ESCROW_PROGRAM_FINGERPRINT_SHA256",
+      "readinessClass": "OPTIONAL",
+      "requiredForStrictReadiness": false,
+      "verification": [
+        "CONFIGURED",
+        "ACCOUNT_EXISTS",
+        "EXECUTABLE",
+        "LOADER_RECOGNIZED",
+        "FINGERPRINT_MATCH_IF_PINNED"
+      ],
+      "deploymentEvidenceRequiredInProduction": false
     },
     {
       "slug": "crisis-fundings",
       "name": "Crisis Funding",
+      "family": "relief-capital",
+      "authorityDomain": "RELIEF_SETTLEMENT",
       "environmentVariable": "SOLANA_FUNDINGS_PROGRAM_ID",
-      "required": false
+      "fingerprintEnvironmentVariable": "SOLANA_FUNDINGS_PROGRAM_FINGERPRINT_SHA256",
+      "readinessClass": "OPTIONAL",
+      "requiredForStrictReadiness": false,
+      "verification": [
+        "CONFIGURED",
+        "ACCOUNT_EXISTS",
+        "EXECUTABLE",
+        "LOADER_RECOGNIZED",
+        "FINGERPRINT_MATCH_IF_PINNED"
+      ],
+      "deploymentEvidenceRequiredInProduction": false
     },
     {
       "slug": "stablecoin",
       "name": "Stablecoin",
+      "family": "payments",
+      "authorityDomain": "PAYMENT_ASSET",
       "environmentVariable": "SOLANA_STABLECOIN_PROGRAM_ID",
-      "required": false
+      "fingerprintEnvironmentVariable": "SOLANA_STABLECOIN_PROGRAM_FINGERPRINT_SHA256",
+      "readinessClass": "OPTIONAL",
+      "requiredForStrictReadiness": false,
+      "verification": [
+        "CONFIGURED",
+        "ACCOUNT_EXISTS",
+        "EXECUTABLE",
+        "LOADER_RECOGNIZED",
+        "FINGERPRINT_MATCH_IF_PINNED"
+      ],
+      "deploymentEvidenceRequiredInProduction": false
     },
     {
       "slug": "oracles",
       "name": "Oracles",
+      "family": "market-data",
+      "authorityDomain": "ORACLE_ADAPTER",
       "environmentVariable": "SOLANA_ORACLES_PROGRAM_ID",
-      "required": false
+      "fingerprintEnvironmentVariable": "SOLANA_ORACLES_PROGRAM_FINGERPRINT_SHA256",
+      "readinessClass": "OPTIONAL",
+      "requiredForStrictReadiness": false,
+      "verification": [
+        "CONFIGURED",
+        "ACCOUNT_EXISTS",
+        "EXECUTABLE",
+        "LOADER_RECOGNIZED",
+        "FINGERPRINT_MATCH_IF_PINNED"
+      ],
+      "deploymentEvidenceRequiredInProduction": false
     },
     {
       "slug": "supply-chain",
       "name": "Supply Chain",
+      "family": "logistics",
+      "authorityDomain": "SUPPLY_CHAIN",
       "environmentVariable": "SOLANA_SUPPLY_CHAIN_PROGRAM_ID",
-      "required": false
+      "fingerprintEnvironmentVariable": "SOLANA_SUPPLY_CHAIN_PROGRAM_FINGERPRINT_SHA256",
+      "readinessClass": "OPTIONAL",
+      "requiredForStrictReadiness": false,
+      "verification": [
+        "CONFIGURED",
+        "ACCOUNT_EXISTS",
+        "EXECUTABLE",
+        "LOADER_RECOGNIZED",
+        "FINGERPRINT_MATCH_IF_PINNED"
+      ],
+      "deploymentEvidenceRequiredInProduction": false
     }
   ]
 }

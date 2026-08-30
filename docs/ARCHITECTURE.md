@@ -72,3 +72,10 @@ No UI component, wallet balance, token holding or AI recommendation can bypass t
 - provider market data is analytics-only.
 - Helius DAS enriches indexing but does not replace RPC authority.
 - large/sensitive evidence remains off-chain with content hashes and verification metadata.
+
+
+## Program assurance
+
+Program identity is deployment-driven. Required programs must be configured and independently verified through RPC before strict readiness passes.
+
+See `docs/PROGRAMS.md` and `programs/registry.json`.

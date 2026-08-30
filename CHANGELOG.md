@@ -1,5 +1,30 @@
 # Changelog
 
+All notable changes to **PowerChain Relief v1.0.0** are recorded here. The canonical product version remains **1.0.0** while the implementation baseline is hardened.
+
+## Unreleased — Repository & Program Assurance Upgrade
+
+### Repository
+- Consolidated product documentation at the repository root and under `docs/`.
+- Removed redundant `apps/web/README.md`, `apps/backend/README.md`, and `programs/README.md`.
+- Added `docs/BUILD_STATUS.md`.
+- Reworked root `README.md` and `CONTRIBUTORS.md`.
+- Removed the need for a separate “build fix status” narrative; historical build corrections are now part of the baseline.
+
+### Programs
+- Upgraded the canonical Solana program registry schema.
+- Added explicit program family, authority domain, readiness class, deployment-evidence requirements and verification policy.
+- Added `docs/PROGRAMS.md`.
+- Preserved deployment-driven program IDs and SHA-256 executable fingerprints.
+- Required programs remain `launchpad-registry`, `launch-policy`, and `token-factory`.
+- Optional programs do not silently become readiness requirements.
+
+### API / UI
+- Program assurance UI continues to expose executable state, loader, ProgramData, deploy slot, upgrade authority and fingerprint status.
+- No fabricated program IDs or deployment fingerprints are introduced.
+
+## Previous implementation history
+
 ## Build Toolchain & Workspace Resolution — 2026-08-29
 
 - Fixed `TS2307` for `@powerchain/crisis-api-contract` by exposing the contract source through the package `types` export.

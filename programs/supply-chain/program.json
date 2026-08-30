@@ -1,10 +1,29 @@
 {
+  "schemaVersion": "1.1.0",
+  "productVersion": "1.0.0",
   "slug": "supply-chain",
   "name": "Supply Chain",
+  "family": "logistics",
+  "authorityDomain": "SUPPLY_CHAIN",
   "environmentVariable": "SOLANA_SUPPLY_CHAIN_PROGRAM_ID",
+  "fingerprintEnvironmentVariable": "SOLANA_SUPPLY_CHAIN_PROGRAM_FINGERPRINT_SHA256",
   "requiredForStrictReadiness": false,
   "programId": null,
   "deploymentFingerprintSha256": null,
+  "sourceOfTruth": "DEPLOYMENT_CONFIGURATION_AND_SOLANA_RPC",
   "status": "CONFIGURED_AT_DEPLOYMENT",
-  "note": "Production IDs and executable fingerprints are runtime/deployment evidence, not source defaults."
+  "verificationPolicy": {
+    "validateBase58PublicKey": true,
+    "requireAccountExists": true,
+    "requireExecutable": true,
+    "requireRecognizedLoader": true,
+    "inspectUpgradeableProgramData": true,
+    "requirePinnedFingerprintInProduction": false
+  },
+  "changeControl": {
+    "initialDeploymentMode": "INITIAL_DEPLOYMENT",
+    "upgradeRequiresExactFingerprintTransition": true,
+    "approvalRequiredInProduction": true
+  },
+  "note": "Production program IDs, upgrade metadata and executable fingerprints are deployment evidence, not source defaults."
 }
